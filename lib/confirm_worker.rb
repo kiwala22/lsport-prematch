@@ -5,6 +5,10 @@ require 'net/https'
 require 'dotenv/load'
 
 class ConfirmWorker
+   log_file = File.open('/var/log/betradar.log', File::WRONLY | File::APPEND)
+   @@logger ||= Logger.new(log_file) 
+   @@logger.level = Logger::INFO
+   
    include Sneakers::Worker
    QUEUE_NAME = "skyline_skyline-Confirm-node#{ENV.fetch('NODE_ID')}"
    
@@ -38,14 +42,9 @@ class ConfirmWorker
       request = Net::HTTP::Post.new(uri.request_uri)
       request.set_form_data('payload' => payload, 'routing_key' => routing_key)
       request['access-token'] = ENV['API_TOKEN']
-      # http.set_debug_output($stdout)
+      http.set_debug_output($stdout)
       response = http.request(request)
-      
-      puts response  
-      
-      #route the messages based on subject, sport and event ID
-      puts routing_key
-      puts payload
+      @@logger.info(payload)
       ack!
    rescue StandardError => e
       #log the error the payload of the message
