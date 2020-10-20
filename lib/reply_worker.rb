@@ -1,11 +1,11 @@
 require 'sneakers'
 
-class Mtsworker
+class ReplyWorker
   include Sneakers::Worker
-   QUEUE_NAME = "skyline_skyline-Confirm-node202".freeze
+   QUEUE_NAME = "skyline_skyline-Reply-node202".freeze
    
    from_queue QUEUE_NAME,
-   exchange: 'skyline_skyline-Confirm',
+   exchange: 'skyline_skyline-Reply',
    # exchange_type: :topic,
    :exchange_options => {
       :type => :topic,
@@ -19,7 +19,7 @@ class Mtsworker
       # :exclusive => true,
       # :passive => true
    },
-   routing_key: ["node202.ticket.confirm"],
+   routing_key: ["node202.ticket.Reply"],
    heartbeat: 5
 
    def work_with_params(payload, delivery_info, metadata)
