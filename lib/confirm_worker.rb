@@ -2,6 +2,7 @@ require 'sneakers'
 require 'uri'
 require 'net/http'
 require 'net/https'
+require 'dotenv/load'
 
 class ConfirmWorker
    include Sneakers::Worker
