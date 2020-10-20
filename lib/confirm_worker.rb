@@ -45,7 +45,7 @@ class ConfirmWorker
       
       #route the messages based on subject, sport and event ID
       puts routing_key
-      puts data
+      puts payload
       ack!
    rescue StandardError => e
       #log the error the payload of the message
