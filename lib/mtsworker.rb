@@ -5,7 +5,7 @@ class Mtsworker
    QUEUE_NAME = ""
    
    from_queue QUEUE_NAME,
-   exchange: 'skyline_skyline-Confirm-node202',
+   exchange: 'skyline_skyline-Confirm',
    # exchange_type: :topic,
    :exchange_options => {
       :type => :topic,
