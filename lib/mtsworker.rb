@@ -14,7 +14,7 @@ class Mtsworker
       :auto_delete => false,
    },
    :queue_options => {
-      :durable => false,
+      :durable => true,
       # :auto_delete => false,
       # :exclusive => true,
       # :passive => true
