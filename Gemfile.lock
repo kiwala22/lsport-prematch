@@ -1,0 +1,38 @@
+GEM
+  remote: https://rubygems.org/
+  specs:
+    amq-protocol (2.3.2)
+    bunny (2.17.0)
+      amq-protocol (~> 2.3, >= 2.3.1)
+    concurrent-ruby (1.1.7)
+    dotenv (2.7.6)
+    foreman (0.87.2)
+    minitest (5.14.2)
+    rake (13.0.1)
+    rr (1.2.1)
+    serverengine (2.0.7)
+      sigdump (~> 0.2.2)
+    sigdump (0.2.4)
+    sneakers (2.11.0)
+      bunny (~> 2.12)
+      concurrent-ruby (~> 1.0)
+      rake
+      serverengine (~> 2.0.5)
+      thor
+    statsd-ruby (1.4.0)
+    thor (1.0.1)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  dotenv (~> 2.7, >= 2.7.6)
+  foreman
+  minitest
+  rake
+  rr
+  sneakers
+  statsd-ruby
+
+BUNDLED WITH
+   2.1.2
