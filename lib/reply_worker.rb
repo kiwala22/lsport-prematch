@@ -6,7 +6,7 @@ require 'dotenv/load'
 
 class ReplyWorker
   include Sneakers::Worker
-   QUEUE_NAME = "skyline_skyline-Reply-node#{ENV['NODE_ID']}"
+   QUEUE_NAME = "skyline_skyline-Reply-node#{ENV.fetch('NODE_ID')}"
    
    from_queue QUEUE_NAME,
    exchange: 'skyline_skyline-Reply',
@@ -23,7 +23,7 @@ class ReplyWorker
       # :exclusive => true,
       # :passive => true
    },
-   routing_key: ["node#{ENV['NODE_ID']}.ticket.Reply"],
+   routing_key: ["node#{ENV.fetch('NODE_ID')}.ticket.Reply"],
    heartbeat: 5
 
    def work_with_params(payload, delivery_info, metadata)
