@@ -8,9 +8,11 @@ require 'logger'
 require 'statsd-ruby'
 
 
-statsd = Statsd.new(ENV['STATSD_HOST'], 9125)
+#statsd = Statsd.new(ENV['STATSD_HOST'], 9125)
+3Sneakers.configure(:heartbeat => 5,:amqp => 'amqp://skyline_skyline:EygMKSpVzX9MIUWO@mtsgate-ci.betradar.com:5671',:vhost => '/skyline_skyline',:log  => '/var/www/html/sportsbook/shared/log/sneakers.log', :daemonize => false, :log => STDOUT, :metrics => Sneakers::Metrics::StatsdMetrics.new(statsd))
 
-Sneakers.configure(:heartbeat => 5,:amqp => 'amqp://skyline_skyline:EygMKSpVzX9MIUWO@mtsgate-ci.betradar.com:5671',:vhost => '/skyline_skyline',:log  => '/var/www/html/sportsbook/shared/log/sneakers.log', :daemonize => false, :log => STDOUT, :metrics => Sneakers::Metrics::StatsdMetrics.new(statsd))
+
+Sneakers.configure(:heartbeat => 5,:amqp => 'amqp://skyline_skyline:EygMKSpVzX9MIUWO@mtsgate-ci.betradar.com:5671',:vhost => '/skyline_skyline',:log  => '/var/www/html/sportsbook/shared/log/sneakers.log', :daemonize => false, :log => STDOUT)
 Sneakers.logger.level = Logger::INFO
 
 r = Sneakers::Runner.new([ mtsworker ])
