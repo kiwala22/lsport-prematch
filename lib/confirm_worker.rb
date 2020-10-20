@@ -4,10 +4,6 @@ require 'net/http'
 require 'net/https'
 
 class ConfirmWorker
-   log_file = File.open('/var/log/betradar.log', File::WRONLY | File::APPEND)
-   @@logger ||= Logger.new(log_file) 
-   @@logger.level = Logger::INFO
-   
    include Sneakers::Worker
    QUEUE_NAME = "skyline_skyline-Confirm-node202}"
    
