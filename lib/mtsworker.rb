@@ -2,7 +2,7 @@ require 'sneakers'
 
 class Mtsworker
   include Sneakers::Worker
-   QUEUE_NAME = ""
+   QUEUE_NAME = "skyline_skyline-Confirm-node202".freeze
    
    from_queue QUEUE_NAME,
    exchange: 'skyline_skyline-Confirm',
