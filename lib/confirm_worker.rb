@@ -48,8 +48,6 @@ class ConfirmWorker
       ack!
    rescue StandardError => e
       #log the error the payload of the message
-      puts e.message
-      puts e.backtrace.join("\n")
       reject!
    end
    
