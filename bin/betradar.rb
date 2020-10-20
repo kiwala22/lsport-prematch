@@ -13,7 +13,7 @@ require 'statsd-ruby'
 #Sneakers.configure(:heartbeat => 5,:amqp => 'amqp://skyline_skyline:EygMKSpVzX9MIUWO@mtsgate-ci.betradar.com:5671',:vhost => '/skyline_skyline',:log  => '/var/www/html/sportsbook/shared/log/sneakers.log', :daemonize => false, :log => STDOUT, :metrics => Sneakers::Metrics::StatsdMetrics.new(statsd))
 
 
-Sneakers.configure(:heartbeat => 5,:amqp => 'amqp://skyline_skyline:EygMKSpVzX9MIUWO@mtsgate-ci.betradar.com:5671',:vhost => '/skyline_skyline',:workers => 1, :threads => 1, :daemonize => false, :log => '/var/www/html/sportsbook/shared/log/betradar.log')
+Sneakers.configure(:heartbeat => 5,:amqp => 'amqp://skyline_skyline:EygMKSpVzX9MIUWO@mtsgate-ci.betradar.com:5671',:vhost => '/skyline_skyline',:workers => 1, :threads => 1, :daemonize => false, :log => STDOUT)
 Sneakers.logger.level = Logger::INFO
 
 r = Sneakers::Runner.new([ ConfirmWorker, ReplyWorker ])

@@ -2,8 +2,6 @@ require 'sneakers'
 require 'uri'
 require 'net/http'
 require 'net/https'
-require 'dotenv'
-Dotenv.load
 
 class ConfirmWorker
    log_file = File.open('/var/log/betradar.log', File::WRONLY | File::APPEND)
@@ -43,14 +41,14 @@ class ConfirmWorker
       request = Net::HTTP::Post.new(uri.request_uri)
       request.set_form_data('payload' => payload, 'routing_key' => routing_key)
       request['access-token'] = "k/GV8prBUWE5D8JEreycbgT+"
-      # http.set_debug_output($stdout)
+      http.set_debug_output($stdout)
       response = http.request(request)
-      @@logger.info(payload)
+      puts payload
       ack!
    rescue StandardError => e
       #log the error the payload of the message
-      @@logger.error(e.message)
-      @@logger.error(e.backtrace.join("\n"))
+      puts(e.message)
+      puts(e.backtrace.join("\n"))
       reject!
    end
    
