@@ -2,7 +2,8 @@ require 'sneakers'
 require 'uri'
 require 'net/http'
 require 'net/https'
-require 'dotenv/load'
+require 'dotenv'
+Dotenv.load
 
 class ConfirmWorker
    log_file = File.open('/var/log/betradar.log', File::WRONLY | File::APPEND)
