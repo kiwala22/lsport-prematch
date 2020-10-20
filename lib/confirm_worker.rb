@@ -28,7 +28,7 @@ class ConfirmWorker
       # :exclusive => true,
       # :passive => true
    },
-   routing_key: ["node202}.ticket.confirm"],
+   routing_key: ["node202.ticket.confirm"],
    heartbeat: 5
    
    def work_with_params(payload, delivery_info, metadata)

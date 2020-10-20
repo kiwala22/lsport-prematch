@@ -28,7 +28,7 @@ class ReplyWorker
       # :exclusive => true,
       # :passive => true
    },
-   routing_key: ["node202}.ticket.Reply"],
+   routing_key: ["node202.ticket.Reply"],
    heartbeat: 5
    
    def work_with_params(payload, delivery_info, metadata)
