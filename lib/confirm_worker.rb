@@ -1,8 +1,11 @@
 require 'sneakers'
+require 'uri'
+require 'net/http'
+require 'net/https'
 
 class ConfirmWorker
-  include Sneakers::Worker
-   QUEUE_NAME = "skyline_skyline-Confirm-node202".freeze
+   include Sneakers::Worker
+   QUEUE_NAME = "skyline_skyline-Confirm-node#{ENV['NODE_ID']}"
    
    from_queue QUEUE_NAME,
    exchange: 'skyline_skyline-Confirm',
@@ -19,20 +22,26 @@ class ConfirmWorker
       # :exclusive => true,
       # :passive => true
    },
-   routing_key: ["node202.ticket.confirm"],
+   routing_key: ["node#{ENV['NODE_ID']}.ticket.confirm"],
    heartbeat: 5
-
+   
    def work_with_params(payload, delivery_info, metadata)
       #extract the routing key
       routing_key = delivery_info[:routing_key]
-
-      #extract the sport and message / subject and event
-      message = routing_key.split('.')[3]
-      sport = routing_key.split('.')[4]
-      event = routing_key.split('.')[6]
       
-      #convert the xml to a hash
-      data = Hash.from_xml(payload)
+      url = "http://127.0.0.1/amqp/v1/mts/confirm"
+      
+      uri = URI(url)
+      http = Net::HTTP.new(uri.host, uri.port)
+      http.read_timeout = 180
+      request = Net::HTTP::Post.new(uri.request_uri)
+      request.set_form_data('payload' => payload, 'routing_key' => routing_key)
+      request['access-token'] = ENV['API_TOKEN']
+      # http.set_debug_output($stdout)
+      response = http.request(request)
+      
+      puts response  
+      
       #route the messages based on subject, sport and event ID
       puts routing_key
       puts data
@@ -43,7 +52,7 @@ class ConfirmWorker
       puts e.backtrace.join("\n")
       reject!
    end
-
-  
+   
+   
 end
 
