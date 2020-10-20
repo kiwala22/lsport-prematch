@@ -3,7 +3,7 @@ require 'uri'
 require 'net/http'
 require 'net/https'
 require 'dotenv'
-Dotenv.load('../.env')
+Dotenv.load
 
 class ReplyWorker
    log_file = File.open('/var/log/betradar.log', File::WRONLY | File::APPEND)
