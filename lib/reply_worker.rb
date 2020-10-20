@@ -40,7 +40,7 @@ class ReplyWorker
       request = Net::HTTP::Post.new(uri.request_uri)
       request.set_form_data('payload' => payload, 'routing_key' => routing_key)
       request['access-token'] = "k/GV8prBUWE5D8JEreycbgT+"
-      http.set_debug_output($stdout)
+      # http.set_debug_output($stdout)
       response = http.request(request)
       puts payload
       ack!
