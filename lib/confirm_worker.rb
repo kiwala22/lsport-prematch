@@ -11,7 +11,7 @@ class ConfirmWorker
    @@logger.level = Logger::INFO
    
    include Sneakers::Worker
-   QUEUE_NAME = "skyline_skyline-Confirm-node#{ENV.fetch('NODE_ID')}"
+   QUEUE_NAME = "skyline_skyline-Confirm-node#{ENV['NODE_ID']}"
    
    from_queue QUEUE_NAME,
    exchange: 'skyline_skyline-Confirm',
@@ -28,7 +28,7 @@ class ConfirmWorker
       # :exclusive => true,
       # :passive => true
    },
-   routing_key: ["node#{ENV.fetch('NODE_ID')}.ticket.confirm"],
+   routing_key: ["node#{ENV['NODE_ID']}.ticket.confirm"],
    heartbeat: 5
    
    def work_with_params(payload, delivery_info, metadata)
