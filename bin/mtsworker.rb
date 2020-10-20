@@ -2,7 +2,8 @@
 require 'bundler/setup'
 root = File.expand_path('../lib', File.dirname(__FILE__))
 $: << root
-require 'mtsworker'
+require 'confirm_worker'
+require 'reply_worker'
 require 'sneakers/runner'
 require 'logger'
 require 'statsd-ruby'
