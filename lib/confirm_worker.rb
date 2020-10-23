@@ -5,7 +5,7 @@ require 'net/https'
 
 class ConfirmWorker
    include Sneakers::Worker
-   QUEUE_NAME = "skyline_skyline-Confirm-node202}"
+   QUEUE_NAME = "skyline_skyline-Confirm-node256}"
    
    from_queue QUEUE_NAME,
    exchange: 'skyline_skyline-Confirm',
@@ -22,7 +22,7 @@ class ConfirmWorker
       # :exclusive => true,
       # :passive => true
    },
-   routing_key: ["node202.ticket.confirm"],
+   routing_key: ["node256.ticket.confirm"],
    heartbeat: 5
    
    def work_with_params(payload, delivery_info, metadata)
