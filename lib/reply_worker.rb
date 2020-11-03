@@ -5,7 +5,7 @@ require 'net/https'
 
 class ReplyWorker
    include Sneakers::Worker
-   QUEUE_NAME = "skyline_skyline-Reply-node256}"
+   QUEUE_NAME = "skyline_skyline-Reply-node256"
    
    from_queue QUEUE_NAME,
    exchange: 'skyline_skyline-Reply',
