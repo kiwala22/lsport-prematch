@@ -1,0 +1,2 @@
+# Procfile
+myworker: bin/betradar
