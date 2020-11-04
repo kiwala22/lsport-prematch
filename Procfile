@@ -1,2 +1,2 @@
 # Procfile
-myworker: bin/betradar
+betradar: bin/betradar
