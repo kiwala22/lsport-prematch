@@ -21,13 +21,11 @@ GEM
       thor
     statsd-ruby (1.4.0)
     thor (1.0.1)
-    uri (0.10.1)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
-  bunny (>= 2.9.2)
   dotenv (~> 2.7, >= 2.7.6)
   foreman
   minitest
@@ -35,7 +33,6 @@ DEPENDENCIES
   rr
   sneakers
   statsd-ruby
-  uri (~> 0.10.0)
 
 BUNDLED WITH
    2.1.2

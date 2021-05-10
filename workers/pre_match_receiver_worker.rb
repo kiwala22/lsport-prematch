@@ -17,9 +17,26 @@ class PreMatchReceiverWorker
 
     def work(payload)
 
-        puts "[*] Received #{payload}"
+        message = payload.to_json
 
-        # Publish Data to AMQP Server when ready
+        connection = Bunny.new(
+               host: "34.89.20.147",
+               port: 5672,
+               user: 'skybet',
+               pass: "sky@bet",
+               vhost: "/")
+        connection.start
 
+        channel = connection.create_channel
+        exchange = channel.fanout('odds feed', durable: true, passive:true)
+        # queue = channel.queue('', :durable => true, passive:true)
+
+        begin
+            exchange.publish(message)
+            puts "Published:=> #{message}  "
+        rescue Interrupt => _
+          channel.close
+          connection.close
+        end
     end
 end
