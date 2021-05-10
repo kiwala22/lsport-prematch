@@ -17,7 +17,7 @@ class PreMatchReceiverWorker
 
     def work(payload)
 
-        message = payload.to_json
+        message = payload#Hash.from_xml(payload)
 
         connection = Bunny.new(
                host: "34.89.20.147",
@@ -28,12 +28,12 @@ class PreMatchReceiverWorker
         connection.start
 
         channel = connection.create_channel
-        exchange = channel.fanout('odds feed', durable: true, passive:true)
+        exchange = channel.fanout('odds feed', durable: true, passive: true)
         # queue = channel.queue('', :durable => true, passive:true)
 
         begin
             exchange.publish(message)
-            puts "Published:=> #{message}  "
+            puts "[*] Published..."
         rescue Interrupt => _
           channel.close
           connection.close
