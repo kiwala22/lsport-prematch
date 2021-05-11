@@ -1,2 +1,2 @@
 # Procfile
-betradar: bin/betradar
+betradar: bin/lsport_prematch
