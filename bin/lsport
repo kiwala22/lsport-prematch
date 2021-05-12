@@ -2,7 +2,7 @@
 require 'bundler/setup'
 require 'sneakers'
 require 'sneakers/runner'
-require './workers/lsport_livematch_receiver_worker'
+require './workers/pre_match_receiver_worker'
 require 'logger'
 require 'statsd-ruby'
 
