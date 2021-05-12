@@ -2,12 +2,12 @@
 require 'bundler/setup'
 require 'sneakers'
 require 'sneakers/runner'
-require './workers/pre_match_receiver_worker'
+require '../workers/pre_match_receiver_worker'
 require 'logger'
 require 'statsd-ruby'
 
 Sneakers.configure(amqp: "amqp://acaciabengo%40skylinesms.com:tyb54634@prematch-rmq.lsports.eu:5672",vhost: "Customers",heartbeat: 580,exchange: "",network_recovery_interval: 10,automatically_recover: true,log_file: 'logs/sneakers.log',verify_peer: false,verify_peer_name: false,allow_self_signed: true)
 Sneakers.logger.level = Logger::INFO
-r = Sneakers::Runner.new([PreMatchReceiverWorker])
+r = Sneakers::Runner.new([PreMatchReceiverWorker.])
 r.run
 
