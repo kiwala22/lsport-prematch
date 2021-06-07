@@ -28,11 +28,11 @@ class PreMatchReceiverWorker
         connection.start
 
         channel = connection.create_channel
-        exchange = channel.fanout('odds feed', durable: true, passive: true)
+        exchange = channel.direct('odds feed', durable: true, passive: true)
         # queue = channel.queue('', :durable => true, passive:true)
 
         begin
-            exchange.publish(message)
+            exchange.publish(message, routing_key:'pre_match')
             puts "[*] Published..."
         rescue Interrupt => _
           channel.close
