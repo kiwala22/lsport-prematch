@@ -28,7 +28,7 @@ class PreMatchReceiverWorker
         connection.start
 
         channel = connection.create_channel
-        exchange = channel.direct('odds feed', durable: true, passive: true)
+        exchange = channel.fanout('odds feed', durable: true, passive: true)
         # queue = channel.queue('', :durable => true, passive:true)
 
         begin
