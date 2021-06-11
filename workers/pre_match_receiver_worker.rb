@@ -11,7 +11,8 @@ class PreMatchReceiverWorker
         :durable => true
     },
     :queue_options => {
-        :durable => true
+        :durable => true,
+        :passive => true
     }
 
 
