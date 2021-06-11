@@ -7,7 +7,7 @@ class PreMatchReceiverWorker
 
     from_queue "_3537_",
     exchange: '',
-    exchange_options => {
+    :exchange_options => {
         :durable => true
     },
     :queue_options => {
