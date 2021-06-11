@@ -20,7 +20,7 @@ class PreMatchReceiverWorker
         message = payload#Hash.from_xml(payload)
 
         connection = Bunny.new(
-               host: "34.89.20.147",
+               host: "localhost",
                port: 5672,
                user: 'skybet',
                pass: "sky@bet",
