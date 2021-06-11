@@ -2,15 +2,15 @@ require 'sneakers'
 require 'json'
 
 class PreMatchReceiverWorker
-    
+
     include Sneakers::Worker
 
-
-    QUEUE_NAME = "_3537_"
-
-    from_queue QUEUE_NAME,
+    from_queue "_3537_",
+    exchange: '',
+    exchange_options => {
+        :durable => true
+    },
     :queue_options => {
-        :passive => true,
         :durable => true
     }
 
@@ -20,11 +20,11 @@ class PreMatchReceiverWorker
         message = payload#Hash.from_xml(payload)
 
         connection = Bunny.new(
-               host: "localhost",
-               port: 5672,
-               user: 'skybet',
-               pass: "sky@bet",
-               vhost: "/")
+         host: "localhost",
+         port: 5672,
+         user: 'skybet',
+         pass: "sky@bet",
+         vhost: "/")
         connection.start
 
         channel = connection.create_channel
@@ -38,6 +38,6 @@ class PreMatchReceiverWorker
         rescue Interrupt => _
           channel.close
           connection.close
-        end
-    end
+      end
+  end
 end
