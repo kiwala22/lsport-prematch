@@ -28,7 +28,7 @@ class PreMatchReceiverWorker
         connection.start
 
         channel = connection.create_channel
-        exchange = channel.topic('odds feed', durable: true, passive: true)
+        exchange = channel.topic('odds_feed', durable: true, passive: true)
         queue = channel.queue('sb-pre-match', 
           :durable => true, passive:true).bind(exchange, routing_key:"pre_match")
 
