@@ -8,12 +8,18 @@ class PreMatchReceiverWorker
     from_queue "_3537_",
     exchange: '',
     :exchange_options => {
-        :durable => true
+        :durable => true,
+        :passive => true,
+        :auto_delete => false
     },
     :queue_options => {
         :durable => true,
-        :passive => true
+        :passive => true,
+        :auto_delete => false,
+        :manual_ack => false
+
     }
+
 
 
     def work(payload)
