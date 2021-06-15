@@ -26,25 +26,30 @@ class PreMatchReceiverWorker
 
         message = payload#Hash.from_xml(payload)
 
-        connection = Bunny.new(
-         host: "localhost",
-         port: 5672,
-         user: 'skybet',
-         pass: "sky@bet",
-         vhost: "/")
-        connection.start
+        threads = []
+        threads << Thread.new do
+            begin
+                connection = Bunny.new(
+                 host: "localhost",
+                 port: 5672,
+                 user: 'skybet',
+                 pass: "sky@bet",
+                 vhost: "/")
+                connection.start
 
-        channel = connection.create_channel
-        exchange = channel.topic('odds_feed', durable: true, passive: true)
-        queue = channel.queue('skybet-pre', 
-          :durable => true, passive:true).bind(exchange, routing_key:"pre_match")
+                channel = connection.create_channel
+                exchange = channel.topic('odds_feed', durable: true, passive: true)
+                queue = channel.queue('skybet', 
+                  :durable => true, passive:true).bind(exchange, routing_key:"pre_match")
 
-        begin
-            exchange.publish(message, routing_key:'pre_match')
-            puts "[*] Published...#{message}"
-        rescue Interrupt => _
-          channel.close
-          connection.close
-      end
-  end
+                exchange.publish(message, routing_key:'pre_match')
+                puts "[*] Published...#{message}"
+            rescue Interrupt => _
+                channel.close
+                connection.close
+            end
+        end
+        # run all threads
+        threads.each { |thr| thr.join }
+    end
 end
