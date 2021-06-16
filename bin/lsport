@@ -6,7 +6,7 @@ require_relative '../workers/pre_match_receiver_worker'
 require 'logger'
 require 'statsd-ruby'
 
-Sneakers.configure(amqp: "amqp://acaciabengo%40skylinesms.com:tyb54634@prematch-rmq.lsports.eu:5672",vhost: "Customers",heartbeat: 5, ack: false, prefetch: 1000,exchange: "",:workers => 1, :threads => 1, :daemonize => false, :log => STDOUT)
+Sneakers.configure(amqp: "amqp://acaciabengo%40skylinesms.com:tyb54634@prematch-rmq.lsports.eu:5672",vhost: "Customers",heartbeat: 5, ack: false,exchange: "",:workers => 1, :threads => 1, :daemonize => false, :log => STDOUT)
 Sneakers.logger.level = Logger::INFO
 r = Sneakers::Runner.new([PreMatchReceiverWorker])
 r.run
