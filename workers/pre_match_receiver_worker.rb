@@ -44,6 +44,7 @@ class PreMatchReceiverWorker
 
                 exchange.publish(message, routing_key:'pre_match')
                 puts "[*] Published...#{message}"
+                connection.close
             rescue Interrupt => _
                 channel.close
                 connection.close
