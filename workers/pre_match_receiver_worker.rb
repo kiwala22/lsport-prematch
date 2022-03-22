@@ -5,7 +5,7 @@ class PreMatchReceiverWorker
 
     include Sneakers::Worker
 
-    from_queue "_3537_",
+    from_queue "_4372_",
     exchange: '',
     :exchange_options => {
         :durable => true,
@@ -39,7 +39,7 @@ class PreMatchReceiverWorker
 
                 channel = connection.create_channel
                 exchange = channel.topic('odds_feed', durable: true, passive: true)
-                queue = channel.queue('skybet', 
+                queue = channel.queue('skybet',
                   :durable => true, passive:true).bind(exchange, routing_key:"pre_match")
 
                 exchange.publish(message, routing_key:'pre_match')
